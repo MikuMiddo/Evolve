@@ -2295,8 +2295,10 @@ export function bloodwar(){
                 }
             }
 
-            let odds = 30 + Math.max(global.race['chameleon'] ? traits.chameleon.vars()[1] : 0,
-                                     global.race['elusive'] ? traits.elusive.vars()[0] : 0);
+            let odds = 30;
+            if (global.race['chameleon'] || global.race['elusive']){
+                odds += global.race['elusive'] ? traits.elusive.vars()[0] : (global.race['chameleon'] ? traits.chameleon.vars()[0] : 20);
+            }
             if (Math.rand(0,odds) === 0){
                 dead += casualties(Math.round(demons * (1 + Math.random() * 3)),0,true);
                 let remain = demons - Math.round(pat_rating / 2);
