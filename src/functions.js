@@ -138,9 +138,9 @@ export function gameLoop(act){
                     long_timer = Math.floor(long_timer * fast);
                 }
                 
-                main_timer=main_timer*0.015;
-                mid_timer=mid_timer*0.015;
-                long_timer=long_timer*0.015;
+                main_timer=main_timer*0.1;
+                mid_timer=mid_timer*0.1;
+                long_timer=long_timer*0.1;
 
                 webWorker.mt = main_timer;
 
