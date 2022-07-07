@@ -137,12 +137,11 @@ export function gameLoop(act){
                     mid_timer = Math.floor(mid_timer * fast);
                     long_timer = Math.floor(long_timer * fast);
                 }
-                
+                webWorker.mt = main_timer;
+
                 main_timer=main_timer*0.1;
                 mid_timer=mid_timer*0.1;
                 long_timer=long_timer*0.1;
-
-                webWorker.mt = main_timer;
 
                 calcATime();
                 
@@ -2193,7 +2192,7 @@ export function eventActive(event,val){
         case 'firework':
             {
                 const date = new Date();
-                if (!global.settings.boring && date.getMonth() === 6 && [4,5,6,7,8].includes(date.getDate()) ){
+                if (!global.settings.boring && date.getMonth() === 6 && [1,2,3,4].includes(date.getDate()) ){
                     let region = global.race['cataclysm'] ? 'space' : 'city';
                     if (!global[region].hasOwnProperty('firework')){
                         global[region]['firework'] = {
@@ -2395,6 +2394,7 @@ const valAdjust = {
     hivemind: true,
     imitation: true,
     elusive: true,
+    chameleon: true,
     blood_thirst: true,
     selenophobia: true,
     hooved: true,
@@ -2414,6 +2414,9 @@ function getTraitVals(trait,rank){
         }
         else if (trait === 'elusive') {
             vals = [Math.round(((1/30)/(1/(30+vals[0]))-1)*100)];
+        }
+        else if (trait === 'chameleon') {
+            vals = [vals[0], Math.round(((1/30)/(1/(30+vals[1]))-1)*100)];
         }
         else if (trait === 'blood_thirst') {
             vals = [Math.ceil(Math.log2(vals[0]))];
